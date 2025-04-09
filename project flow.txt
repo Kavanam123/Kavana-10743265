@@ -1,0 +1,154 @@
+The aim of our project is to create an end to end CI/CD pipeline in aws platform using Jenkins as the orchestration tool , GitHub as the scm (source code management) and maven as the build tool , deploy in the docker instance and create a docker image,store the docker image in ecr,achieve Kubernetes deployment using the ecr image .
+
+Build a sample java web app using maven 
+
+
+DEVELOPER MACHINE 
+
+1.Deploy an EC2 Instance with the port (ssh,http,custom tcp (8080))
+2.connect in the terminal > root
+3.Install git 
+4Create ssh key and copy the key 
+add ssh key in your github
+5.Create a directory and initialize the git inside the directory
+6. Clone the client git repository 
+git clone http://client repo
+7.Now move the cloned files to our directory
+8.Goto the directory that we created now add remote connection to our github repo
+git remote add origin url of our repo
+9.git add . adding all the files in the directory to repo and commiting it and finally git push origin main
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+JENKINS MACHINE
+
+1.Deploy the Ec2 instance 
+2.connect in the terminal 
+3.install java 
+4.install git
+5.install jenkins
+6.install maven
+7.copy public ip from instance and display it in web with :8080
+8.configure jenkins 
+9.Install plugins such as maven integration,github integration , publish over ssh,deploy to container
+10.create the webhook 
+11.In manage jenkins>tools add java and maven paths 
+12.create and build the maven project and check
+g
+
+give root passwd
+Give permissions in vim /etc/ssh/sshd_config
+restart and enable sshd
+generate ssh key
+ssh-copy-id root@ip of docker
+
+-----------------------------------------------------------------------------------------
+ TOMCAT 
+
+1.Deploy ec2,connect
+2.install java 
+3.install tomcat 
+4.Add/Modify the roles in context.xml file 
+5.modify(comment out the ip) the example,host-manager,manager file
+
+
+-----------------------------------------------------------------------------------------
+
+Create a Public repo in ECR
+
+
+
+
+----------------------------------------------------------------------------------------
+DOCKER 
+
+1.create instance,connect
+2.Install aws cli 
+3.Configure aws
+4.install docker
+give root passwd
+Give permissions in vim /etc/ssh/sshd_config
+restart and enable sshd
+
+systemctl start docker
+
+Create sshkey 
+ssh-copy-id root@ip of kubernetes
+
+-----------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+Kubernetes
+
+1.EC2 Connect 
+2.aws cli,configure 
+3.Install eksctl,kubectl
+4.give root passwd
+5.Give permissions in vim /etc/ssh/sshd_config
+6.restart and enable sshd
+
+7.sshkey 
+
+create the cluster
+ aftercluster is ready 
+vim deployment.yml
+vim service.yml
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+On Jenkins UI
+
+1.Add deployer credentials in manage jenkins>credentials>global user>add 
+2.Manage jenkins>system>publish over ssh>add servers of 
+    * Jenkins 
+    * Docker
+    * kubernetes
+
+3.job>configure> add the war file specifications of tomcat
+    in Send build artifacts over SSH> add the specifications of Jenkins,docker , kubernetes(execute commands)
+4.Build and verify
+
+------------------------------------------------------------------------------------------------------
+
+After build successful 
+get the external ip of the app :8080/webapp/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
